@@ -19,14 +19,42 @@ Use console.log() to clearly show the before-and-after type conversions.
 */
 
 
-let result = "5" - 2;
-console.log("The result is: " + result);
+//let result = "5" - 2;
+// Bug 1: "5" - 2 results in implicit type conversion (string "5" is converted to number).
+// Fix: Ensure both operands are numbers using Number().
+let result = Number("5") - 2;
+console.log("The result is: " + result); // Expected output: 3
 
-let isValid = Boolean("false");
+
+//let isValid = Boolean("false");
+// Bug 2: Boolean("false") returns true because any non-empty string is truthy.
+// Fix: Convert the string explicitly to a boolean based on its content.
+let isValid = ("false" === "true");
 if (isValid) {
     console.log("This is valid!");
+} else {
+    console.log("This is NOT valid!"); // Expected output
 }
 
 let age = "25";
-let totalAge = age + 5;
-console.log("Total Age: " + totalAge);
+// Bug 3: age is a string, and the "+" operator concatenates instead of adding numbers.
+// Fix: Convert age to a number before performing addition.
+//let totalAge = age + 5;
+let totalAge = Number(age) + 5;
+console.log("Total Age: " + totalAge);  // Expected output: 30
+
+//Implicit Type Conversion Example
+let implicitExample = "10" * 2;
+console.log("Implicit Conversion:", implicitExample); // Output: 20 (string "10" is implicitly converted to a number)
+
+//Explicit Type Conversion Example
+let explicitExample = "42";
+console.log(explicitExample, typeof (explicitExample));
+let explicitNum = Number(explicitExample);
+console.log("Explicit Conversion:", explicitNum, typeof explicitNum); // Output: 42 'number'
+
+// Converting null to a number
+let numValue = null;
+console.log(numValue);
+console.log("Number(null):", Number(null)); // Output: 0
+
